@@ -49,8 +49,7 @@ const SignupForm = () => {
 
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-5 w-full mt-4"
-        >
+          className="flex flex-col gap-5 w-full mt-4">
           <FormField
             control={form.control}
             name="name"
@@ -118,8 +117,7 @@ const SignupForm = () => {
             Already have an account?
             <Link
               to="/sign-in"
-              className="ml-1 text-primary-500 text-small-semibold"
-            >
+              className="ml-1 text-primary-500 text-small-semibold">
               Log in
             </Link>
           </p>
