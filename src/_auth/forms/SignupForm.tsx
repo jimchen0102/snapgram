@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Loader from "@/components/shared/Loader";
 import { signupSchema } from "@/lib/validation";
+import { createUserAccount } from "@/lib/appwrite/api";
 
 const SignupForm = () => {
   const isLoading = false;
@@ -29,10 +30,10 @@ const SignupForm = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof signupSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof signupSchema>) {
+    const newUser = await createUserAccount(values);
+
+    if (!newUser) return;
   }
 
   return (
@@ -49,7 +50,8 @@ const SignupForm = () => {
 
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-5 w-full mt-4">
+          className="flex flex-col gap-5 w-full mt-4"
+        >
           <FormField
             control={form.control}
             name="name"
@@ -117,7 +119,8 @@ const SignupForm = () => {
             Already have an account?
             <Link
               to="/sign-in"
-              className="ml-1 text-primary-500 text-small-semibold">
+              className="ml-1 text-primary-500 text-small-semibold"
+            >
               Log in
             </Link>
           </p>
